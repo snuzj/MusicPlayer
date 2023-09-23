@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:background="@drawable/background">
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/googleBtn"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/m_button_height"
+        android:layout_marginBottom="5dp"
+        app:cornerRadius="8dp"
+        android:text="Login with Google"
+        android:layout_above="@id/emailBtn"
+        app:icon="@drawable/ic_google"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/emailBtn"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/m_button_height"
+        android:layout_marginBottom="5dp"
+        app:cornerRadius="8dp"
+        android:layout_above="@id/phoneBtn"
+        android:text="Login with Email"
+        app:icon="@drawable/ic_mail"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/phoneBtn"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/m_button_height"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
+        app:cornerRadius="8dp"
+        android:text="Login with phone"
+        app:icon="@drawable/ic_phone"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="Welcome to Music Player"
+        android:layout_above="@id/googleBtn"
+        android:layout_marginBottom="20dp"
+        android:textSize="20sp"
+        android:textColor="@color/white"/>
+
+
+
+</RelativeLayout>
