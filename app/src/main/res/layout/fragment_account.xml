@@ -3,12 +3,137 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.AccountFragment">
 
-    <com.google.android.material.button.MaterialButton
+    <ImageButton
         android:id="@+id/logoutBtn"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@drawable/ic_logout"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        app:tint="@color/black"
+        android:background="@drawable/shape_circlebutton01"
+        app:backgroundTint="#2C000000"/>
+
+    <ImageButton
+        android:id="@+id/editBtn"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@drawable/ic_edit"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"
+        android:background="@drawable/shape_circlebutton01"
+        app:backgroundTint="#2C000000"/>
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/profileIv"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="80dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/profilelogo"
+        app:shapeAppearanceOverlay="@style/styleRoundedCornersImage"
+        app:strokeWidth="1dp"
+        app:strokeColor="@color/white"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/nameTv"
+        android:layout_below="@id/profileIv"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="20dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:text="Username"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/emailTv"
+        android:layout_below="@id/nameTv"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="5dp"
+        android:textSize="15sp"
+        android:text="abc@example.com"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/phoneTv"
+        android:layout_below="@id/nameTv"
+        android:layout_toEndOf="@id/emailTv"
+        android:layout_marginStart="10dp"
+        android:text="null"
+        android:layout_marginTop="5dp"
+        android:textSize="15sp"/>
+
+    <ImageButton
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:id="@+id/playBtn"
+        android:layout_below="@id/profileIv"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp"
+        android:src="@drawable/ic_play"
+        android:background="@android:color/transparent"/>
+
+    <ImageButton
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:id="@+id/moreBtn"
+        android:layout_below="@id/profileIv"
+        android:layout_toStartOf="@id/playBtn"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp"
+        android:src="@drawable/ic_more"
+        android:background="@android:color/transparent"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/favoritesTv"
+        android:layout_below="@id/emailTv"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="20dp"
+        android:text="Following"/>
+
+    <View
+        android:id="@+id/view1"
+        android:layout_below="@id/favoritesTv"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/black" />
+
+    <TextView
+        android:id="@+id/favoritesLabelTv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Log out"/>
+        android:text="Playlists"
+        android:layout_below="@id/view1"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginStart="20dp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/favoriteRv"
+        android:layout_below="@id/favoritesLabelTv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+
 
 </RelativeLayout>
