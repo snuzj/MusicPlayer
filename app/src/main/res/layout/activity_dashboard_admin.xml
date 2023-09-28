@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DashboardAdminActivity"
+    tools:context=".activities.dashboard.DashboardAdminActivity"
     android:background="@color/black">
     <RelativeLayout
         android:layout_width="match_parent"
@@ -29,9 +29,66 @@
             android:src="@drawable/ic_logout"/>
     </RelativeLayout>
     <View
+        android:id="@+id/view"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_below="@id/toolbarRl"
         android:background="@color/emeral"/>
+
+    <EditText
+        android:id="@+id/searchEt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/view"
+        android:hint="Search"
+        android:backgroundTint="@color/emeral"
+        android:textColor="@color/emeral"
+        android:textColorHint="@color/emeral"
+        android:drawableStart="@drawable/baseline_search_24"
+        android:drawableTint="@color/emeral"
+        android:drawablePadding="10dp"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="10dp"
+        android:id="@+id/categoryRv"
+        android:layout_below="@id/searchEt"
+        android:layout_above="@id/bottomLl"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/row_category"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/bottomLl"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/addCategoryBtn"
+            android:layout_weight="1"
+            android:backgroundTint="@color/emeral"
+            android:text="+ Add Category"
+            android:minHeight="50dp"
+            app:cornerRadius="8dp"
+            android:textColor="#041159"
+            android:layout_marginEnd="10dp" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/addSongBtn"
+            android:src="@drawable/ic_music_add"
+            android:backgroundTint="@color/emeral" />
+
+
+    </LinearLayout>
 
 </RelativeLayout>

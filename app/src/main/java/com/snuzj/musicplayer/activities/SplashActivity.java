@@ -1,4 +1,4 @@
-package com.snuzj.musicplayer;
+package com.snuzj.musicplayer.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +14,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.snuzj.musicplayer.activities.dashboard.DashboardAdminActivity;
+import com.snuzj.musicplayer.activities.dashboard.DashboardUserActivity;
+import com.snuzj.musicplayer.activities.login.MainActivity;
 import com.snuzj.musicplayer.databinding.ActivitySplashBinding;
 
 public class SplashActivity extends AppCompatActivity {
@@ -42,7 +45,7 @@ public class SplashActivity extends AppCompatActivity {
         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
 
         if (firebaseUser == null){
-            startActivity(new Intent(SplashActivity.this,MainActivity.class));
+            startActivity(new Intent(SplashActivity.this, MainActivity.class));
             finish();
         } else{
             DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
@@ -53,10 +56,10 @@ public class SplashActivity extends AppCompatActivity {
                             //get user type
                             String userType = ""+snapshot.child("userType").getValue();
                             if (userType.equals("user")){
-                                startActivity(new Intent(SplashActivity.this,DashboardUserActivity.class));
+                                startActivity(new Intent(SplashActivity.this, DashboardUserActivity.class));
                                 finish();
                             } else if (userType.equals("admin")) {
-                                startActivity(new Intent(SplashActivity.this,DashboardAdminActivity.class));
+                                startActivity(new Intent(SplashActivity.this, DashboardAdminActivity.class));
                                 finish();
                             }
                         }

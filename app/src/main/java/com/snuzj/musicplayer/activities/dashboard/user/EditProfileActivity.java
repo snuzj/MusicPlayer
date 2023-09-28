@@ -1,4 +1,4 @@
-package com.snuzj.musicplayer;
+package com.snuzj.musicplayer.activities.dashboard.user;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -29,6 +29,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.snuzj.musicplayer.R;
+import com.snuzj.musicplayer.activities.dashboard.DashboardUserActivity;
 import com.snuzj.musicplayer.databinding.ActivityEditProfileBinding;
 
 import java.util.HashMap;
@@ -56,7 +58,7 @@ public class EditProfileActivity extends AppCompatActivity {
         loadMyInfo();
 
         //handle click,backBtn
-        binding.backBtn.setOnClickListener(view -> startActivity(new Intent(EditProfileActivity.this,DashboardUserActivity.class)));
+        binding.backBtn.setOnClickListener(view -> startActivity(new Intent(EditProfileActivity.this, DashboardUserActivity.class)));
 
         //handle click,add profile image
         binding.profileImagePickFab.setOnClickListener(view -> imagePickDialog());

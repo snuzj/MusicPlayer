@@ -1,4 +1,4 @@
-package com.snuzj.musicplayer;
+package com.snuzj.musicplayer.activities.login;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,10 +8,10 @@ import android.os.Bundle;
 import android.util.Patterns;
 import android.widget.Toast;
 
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.snuzj.musicplayer.activities.dashboard.DashboardUserActivity;
 import com.snuzj.musicplayer.databinding.ActivityEmailRegisterBinding;
 
 import java.util.HashMap;
@@ -117,7 +117,7 @@ public class EmailRegisterActivity extends AppCompatActivity {
                         {
                             progressDialog.dismiss();
                             Toast.makeText(EmailRegisterActivity.this,"Account created.",Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(EmailRegisterActivity.this,DashboardUserActivity.class));
+                            startActivity(new Intent(EmailRegisterActivity.this, DashboardUserActivity.class));
                             finish();
                         }
                         )

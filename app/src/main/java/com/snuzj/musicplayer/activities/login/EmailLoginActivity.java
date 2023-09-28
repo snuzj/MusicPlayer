@@ -1,4 +1,4 @@
-package com.snuzj.musicplayer;
+package com.snuzj.musicplayer.activities.login;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,6 +16,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.snuzj.musicplayer.activities.dashboard.DashboardAdminActivity;
+import com.snuzj.musicplayer.activities.dashboard.DashboardUserActivity;
 import com.snuzj.musicplayer.databinding.ActivityEmailLoginBinding;
 
 public class EmailLoginActivity extends AppCompatActivity {
@@ -95,10 +97,10 @@ public class EmailLoginActivity extends AppCompatActivity {
                         //get user type
                         String userType = ""+snapshot.child("userType").getValue();
                         if (userType.equals("user")){
-                            startActivity(new Intent(EmailLoginActivity.this,DashboardUserActivity.class));
+                            startActivity(new Intent(EmailLoginActivity.this, DashboardUserActivity.class));
                             finish();
                         } else if (userType.equals("admin")) {
-                            startActivity(new Intent(EmailLoginActivity.this,DashboardAdminActivity.class));
+                            startActivity(new Intent(EmailLoginActivity.this, DashboardAdminActivity.class));
                             finish();
                         }
                     }

@@ -1,4 +1,4 @@
-package com.snuzj.musicplayer;
+package com.snuzj.musicplayer.activities.login;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,6 +19,7 @@ import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.snuzj.musicplayer.activities.dashboard.DashboardUserActivity;
 import com.snuzj.musicplayer.databinding.ActivityPhoneLoginBinding;
 
 import java.util.HashMap;
@@ -193,7 +194,7 @@ public class PhoneLoginActivity extends AppCompatActivity {
 
                        } else{
                            Log.d(TAG, "onSuccess: Existing User");
-                           startActivity(new Intent(PhoneLoginActivity.this,DashboardUserActivity.class));
+                           startActivity(new Intent(PhoneLoginActivity.this, DashboardUserActivity.class));
                            finish();
                        }
 

@@ -21,8 +21,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.snuzj.musicplayer.EditProfileActivity;
-import com.snuzj.musicplayer.MainActivity;
+import com.snuzj.musicplayer.activities.dashboard.user.EditProfileActivity;
+import com.snuzj.musicplayer.activities.login.MainActivity;
 import com.snuzj.musicplayer.R;
 import com.snuzj.musicplayer.databinding.FragmentAccountBinding;
 

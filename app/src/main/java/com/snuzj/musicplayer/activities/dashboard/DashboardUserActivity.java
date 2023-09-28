@@ -1,4 +1,4 @@
-package com.snuzj.musicplayer;
+package com.snuzj.musicplayer.activities.dashboard;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,6 +9,7 @@ import android.view.MenuItem;
 
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.snuzj.musicplayer.R;
 import com.snuzj.musicplayer.databinding.ActivityDashboardUserBinding;
 import com.snuzj.musicplayer.fragments.AccountFragment;
 import com.snuzj.musicplayer.fragments.HomeFragment;

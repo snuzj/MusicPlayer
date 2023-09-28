@@ -1,4 +1,4 @@
-package com.snuzj.musicplayer;
+package com.snuzj.musicplayer.activities.login;
 
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -22,6 +22,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.snuzj.musicplayer.R;
+import com.snuzj.musicplayer.activities.dashboard.DashboardUserActivity;
 import com.snuzj.musicplayer.databinding.ActivityMainBinding;
 
 import java.util.HashMap;
@@ -106,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
                             }
                             else{
                                 Log.d(TAG, "firebaseAuthWithGoogleAccount: User Existed...");
-                                startActivity(new Intent(MainActivity.this,DashboardUserActivity.class));
+                                startActivity(new Intent(MainActivity.this, DashboardUserActivity.class));
                                 finish();
                             }
                         }

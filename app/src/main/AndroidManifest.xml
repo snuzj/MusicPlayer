@@ -2,9 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -17,13 +21,16 @@
         android:theme="@style/Theme.MusicPlayer"
         tools:targetApi="31">
         <activity
-            android:name=".EditProfileActivity"
+            android:name=".activities.dashboard.admin.AddCategoryActivity"
             android:exported="false" />
         <activity
-            android:name=".PhoneLoginActivity"
+            android:name=".activities.dashboard.user.EditProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".SplashActivity"
+            android:name=".activities.login.PhoneLoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,19 +39,19 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".DashboardUserActivity"
+            android:name=".activities.dashboard.DashboardUserActivity"
             android:exported="false" />
         <activity
-            android:name=".DashboardAdminActivity"
+            android:name=".activities.dashboard.DashboardAdminActivity"
             android:exported="false" />
         <activity
-            android:name=".EmailRegisterActivity"
+            android:name=".activities.login.EmailRegisterActivity"
             android:exported="false" />
         <activity
-            android:name=".EmailLoginActivity"
+            android:name=".activities.login.EmailLoginActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.login.MainActivity"
             android:exported="false" />
     </application>
 
