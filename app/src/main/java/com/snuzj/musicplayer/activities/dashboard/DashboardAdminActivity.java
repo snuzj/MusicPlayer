@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -16,6 +17,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.snuzj.musicplayer.activities.dashboard.admin.AddCategoryActivity;
+import com.snuzj.musicplayer.activities.dashboard.admin.AddMusicActivity;
 import com.snuzj.musicplayer.activities.login.MainActivity;
 import com.snuzj.musicplayer.adapters.AdapterCategory;
 import com.snuzj.musicplayer.databinding.ActivityDashboardAdminBinding;
@@ -47,8 +49,16 @@ public class DashboardAdminActivity extends AppCompatActivity {
         });
 
         binding.addCategoryBtn.setOnClickListener(view -> {
-            startActivity(new Intent(this, AddCategoryActivity.class));
+            startActivity(new Intent(DashboardAdminActivity.this, AddCategoryActivity.class));
             finishAffinity();
+        });
+
+        binding.addSongBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(DashboardAdminActivity.this, AddMusicActivity.class));
+                finishAffinity();
+            }
         });
 
         binding.searchEt.addTextChangedListener(new TextWatcher() {
@@ -62,7 +72,7 @@ public class DashboardAdminActivity extends AppCompatActivity {
                 try {
                     adapterCategory.getFilter().filter(sequence);
                 } catch (Exception e){
-                    
+
                 }
             }
 
