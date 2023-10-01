@@ -3,6 +3,7 @@ package com.snuzj.musicplayer.adapters;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.snuzj.musicplayer.activities.dashboard.admin.SongListAdminActivity;
 import com.snuzj.musicplayer.databinding.RowCategoryBinding;
 import com.snuzj.musicplayer.filters.FilterCategory;
 import com.snuzj.musicplayer.models.ModelCategory;
@@ -70,6 +72,13 @@ public class AdapterCategory extends RecyclerView.Adapter<AdapterCategory.Holder
                             dialogInterface.dismiss();
                         }
                     }).show();
+        });
+
+        holder.itemView.setOnClickListener(view -> {
+            Intent intent = new Intent(context, SongListAdminActivity.class);
+            intent.putExtra("categoryId",id);
+            intent.putExtra("categoryTitle",category);
+            context.startActivity(intent);
         });
     }
 

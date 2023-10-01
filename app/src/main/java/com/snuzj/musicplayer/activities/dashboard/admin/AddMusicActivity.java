@@ -54,7 +54,7 @@ public class AddMusicActivity extends AppCompatActivity {
 
     private Uri audioUri = null;
 
-    private ArrayList<ModelCategory> categoryArrayList;
+    private ArrayList<String> categoryTitleArrayList, categoryIdArrayList;
 
 
 
@@ -102,6 +102,7 @@ public class AddMusicActivity extends AppCompatActivity {
         artist = binding.artistEt.getText().toString().trim();
         duration = binding.durationEt.getText().toString().trim();
 
+
         if(title.isEmpty()){
             binding.titleEt.setError("title is empty");
             binding.titleEt.requestFocus();
@@ -114,7 +115,10 @@ public class AddMusicActivity extends AppCompatActivity {
         } else if (duration.isEmpty()) {
             binding.durationEt.setError("duration is empty");
             binding.durationEt.requestFocus();
-        } else {
+        } else if (selectedCategoryTitle.isEmpty()){
+            Toast.makeText(AddMusicActivity.this,"Please choose category",Toast.LENGTH_SHORT).show();
+        }
+        else {
             uploadFiles();
         }
 
@@ -202,7 +206,9 @@ public class AddMusicActivity extends AppCompatActivity {
         hashMap.put("id",""+timestamp);
         hashMap.put("title",""+title);
         hashMap.put("album",""+album);
+        hashMap.put("artist",""+artist);
         hashMap.put("duration",""+duration);
+        hashMap.put("categoryId",""+selectedCategoryId);
         hashMap.put("audioUrl",""+uploadedAudioUrl);
         hashMap.put("imageUrl",""+uploadedImageUrl);
         hashMap.put("timestamp",timestamp);
@@ -232,21 +238,22 @@ public class AddMusicActivity extends AppCompatActivity {
 
     private void loadMusicCategories() {
         Log.d(TAG, "loadMusicCategories: ");
-        categoryArrayList = new ArrayList<>();
+        categoryTitleArrayList = new ArrayList<>();
+        categoryIdArrayList = new ArrayList<>();
 
         //db ref
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Categories");
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                categoryArrayList.clear();
+                categoryTitleArrayList.clear();
+                categoryIdArrayList.clear();
                 for (DataSnapshot ds: snapshot.getChildren()){
-                    ModelCategory modelCategory = ds.getValue(ModelCategory.class);
-                    categoryArrayList.add(modelCategory);
+                    String categoryId = ""+ds.child("id").getValue();
+                    String categoryTitle = ""+ds.child("category").getValue();
 
-
-
-                    Log.d(TAG, "onDataChange: "+modelCategory.getCategory());
+                    categoryTitleArrayList.add(categoryTitle);
+                    categoryIdArrayList.add(categoryId);
                 }
             }
 
@@ -257,21 +264,26 @@ public class AddMusicActivity extends AppCompatActivity {
         });
     }
 
+    private String selectedCategoryId, selectedCategoryTitle;
+
     private void categoryPickDialog() {
         Log.d(TAG, "categoryPickDialog: showing category pick dialog");
 
         //get array of categories
-        String[] categoriesArray = new String[categoryArrayList.size()];
-        for (int i = 0; i < categoryArrayList.size(); i++) {
-            categoriesArray[i] = categoryArrayList.get(i).getCategory();
+        String[] categoriesArray = new String[categoryTitleArrayList.size()];
+        for (int i = 0; i < categoryTitleArrayList.size(); i++) {
+            categoriesArray[i] = categoryTitleArrayList.get(i);
         }
 
         //alert dialog
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Pick Category")
                 .setItems(categoriesArray, (dialogInterface, which) -> {
-                    String category = categoriesArray[which];
-                    binding.categoryTv.setText(category);
+                    selectedCategoryTitle = categoryTitleArrayList.get(which);
+                    selectedCategoryId = categoryIdArrayList.get(which);
+                    binding.categoryTv.setText(selectedCategoryTitle);
+
+                    Log.d(TAG, "categoryPickDialog: Selected Category "+selectedCategoryId+" "+selectedCategoryTitle);
 
                 }).show();
     }
