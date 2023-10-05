@@ -1,11 +1,15 @@
 package com.snuzj.musicplayer.activities.dashboard;
 
+import static androidx.core.util.TimeUtils.formatDuration;
+
 import android.app.ProgressDialog;
-import android.content.Context;
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
+import android.widget.SeekBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -40,6 +44,10 @@ public class PlayMusicActivity extends AppCompatActivity implements View.OnClick
 
     private boolean isFavorite = false;
 
+    private Handler handler = new Handler();
+    Runnable updateSeekBar;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +60,7 @@ public class PlayMusicActivity extends AppCompatActivity implements View.OnClick
         binding.nextBtn.setOnClickListener(this);
         binding.downloadBtn.setOnClickListener(this);
         binding.favorteBtn.setOnClickListener(this);
+        binding.shareBtn.setOnClickListener(this);
 
         songId = getIntent().getStringExtra("id");
 
@@ -72,7 +81,49 @@ public class PlayMusicActivity extends AppCompatActivity implements View.OnClick
             progressDialog.dismiss();
         });
 
+        binding.union.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                if (mediaPlayer != null && fromUser) {
+                    int duration = mediaPlayer.getDuration();
+                    int newPosition = (int) (((double) progress / 100) * duration);
+                    mediaPlayer.seekTo(newPosition);
+                }
+            }
+
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
+        updateSeekBar = new Runnable() {
+            @Override
+            public void run() {
+                if (mediaPlayer != null) {
+                    int currentPosition = mediaPlayer.getCurrentPosition();
+                    int totalDuration = mediaPlayer.getDuration();
+                    int progress = (int) (((double) currentPosition / totalDuration) * 100);
+                    binding.union.setProgress(progress);
+
+                    // Cập nhật TextView
+                    String formattedTime = formatDuration(currentPosition);
+                    binding.startTv.setText(formattedTime);
+                }
+                handler.postDelayed(this, 1000); // Cập nhật mỗi giây
+            }
+        };
+
+
     }
+
+
 
     @Override
     public void onClick(View view) {
@@ -96,6 +147,33 @@ public class PlayMusicActivity extends AppCompatActivity implements View.OnClick
                 } else{
                     MyApplication.addToFavorite(PlayMusicActivity.this,songId);
                 }
+            }
+        } else if (view.getId() == R.id.shareBtn) {
+            shareSong();
+
+        }
+    }
+
+    private void shareSong() {
+        if (songId != null) {
+            String title = binding.songTv.getText().toString();
+            String artist = binding.artistTv.getText().toString();
+
+            // Create the message to share
+            String shareMessage = "Song: " + title + " by " + artist + " is now available on MusicPlayer.";
+
+            // Create and set up the intent
+            Intent shareIntent = new Intent(Intent.ACTION_SEND);
+            shareIntent.setType("text/plain");
+            shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Check out this song!");
+            shareIntent.putExtra(Intent.EXTRA_TEXT, shareMessage);
+
+            // Check if there's an activity that can handle the intent
+            if (shareIntent.resolveActivity(getPackageManager()) != null) {
+                startActivity(Intent.createChooser(shareIntent, "Share via"));
+            } else {
+                // Handle the case where there's no activity to handle the intent
+                Toast.makeText(this, "No app available to handle sharing", Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -164,6 +242,7 @@ public class PlayMusicActivity extends AppCompatActivity implements View.OnClick
             mediaPlayer.start();
             isPlaying = true;
             updatePlayButton();
+            handler.postDelayed(updateSeekBar, 1000);
         }
     }
 
@@ -172,6 +251,7 @@ public class PlayMusicActivity extends AppCompatActivity implements View.OnClick
             mediaPlayer.pause();
             isPlaying = false;
             updatePlayButton();
+            handler.removeCallbacks(updateSeekBar);
         }
     }
 
@@ -206,6 +286,7 @@ public class PlayMusicActivity extends AppCompatActivity implements View.OnClick
             mediaPlayer.release();
             mediaPlayer = null;
             isPlaying = false;
+            handler.removeCallbacks(updateSeekBar);
         }
     }
 
@@ -330,5 +411,19 @@ public class PlayMusicActivity extends AppCompatActivity implements View.OnClick
     protected void onDestroy() {
         super.onDestroy();
         stopAndReleaseMediaPlayer();
+        handler.removeCallbacks(updateSeekBar);
     }
+    private String formatDuration(int milliseconds) {
+        int seconds = (milliseconds / 1000) % 60;
+        int minutes = ((milliseconds / (1000 * 60)) % 60);
+        int hours = ((milliseconds / (1000 * 60 * 60)) % 24);
+
+        // Format the time as HH:mm:ss or mm:ss
+        if (hours > 0) {
+            return String.format("%02d:%02d:%02d", hours, minutes, seconds);
+        } else {
+            return String.format("%02d:%02d", minutes, seconds);
+        }
+    }
+
 }

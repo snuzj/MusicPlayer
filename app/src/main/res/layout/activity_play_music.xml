@@ -93,22 +93,15 @@
         android:src="@drawable/ic_download"
         app:tint="@color/black" />
 
-    <ImageView android:id="@+id/line"
-        android:src="@drawable/line_4"
-        android:contentDescription="line_4"
+
+
+    <SeekBar android:id="@+id/union"
+        android:backgroundTint="@color/purple_700"
+        android:contentDescription="union"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/artistTv"
-        android:layout_marginTop="52dp"
-        android:layout_width="331.01dp"
-        android:layout_height="5dp" />
-
-    <ImageView android:id="@+id/union"
-        android:src="@drawable/union"
-        android:contentDescription="union"
-        android:layout_marginStart="31dp"
-        android:layout_below="@id/artistTv"
         android:layout_marginTop="50dp"
-        android:layout_width="237dp"
+        android:layout_width="350dp"
         android:layout_height="10dp" />
 
     <TextView
@@ -116,7 +109,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/startTv"
         android:text="00:00"
-        android:layout_below="@id/line"
+        android:layout_below="@id/union"
         android:layout_marginTop="5dp"
         android:layout_marginStart="30dp"/>
 
@@ -125,7 +118,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/durationTv"
         android:text="00:00"
-        android:layout_below="@id/line"
+        android:layout_below="@id/union"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="30dp"
         android:layout_marginTop="5dp"/>
@@ -133,7 +126,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_below="@id/line"
+        android:layout_below="@id/union"
         android:layout_marginTop="50dp"
         android:orientation="horizontal"
         android:gravity="center">
