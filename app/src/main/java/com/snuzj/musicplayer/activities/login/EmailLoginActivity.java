@@ -39,12 +39,19 @@ public class EmailLoginActivity extends AppCompatActivity {
 
         binding.backBtn.setOnClickListener(view -> onBackPressed());
 
-        binding.noAccountTv.setOnClickListener(view ->
-                startActivity(new Intent(EmailLoginActivity.this, EmailRegisterActivity.class)));
+        binding.noAccountTv.setOnClickListener(view ->{
+                startActivity(new Intent(EmailLoginActivity.this, EmailRegisterActivity.class));
+                finish();
+        });
 
         binding.loginBtn.setOnClickListener(view ->
                 validateData());
 
+        binding.forgotPasswordTv.setOnClickListener(view -> {
+            startActivity(new Intent(this,ForgotPasswordActivity.class));
+            finish();
+        }
+        );
 
     }
 
