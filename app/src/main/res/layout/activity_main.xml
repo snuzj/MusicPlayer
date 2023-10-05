@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.login.MainActivity"
-    android:background="@drawable/background">
+    tools:context=".activities.login.MainActivity">
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/googleBtn"
@@ -51,7 +50,13 @@
         android:layout_above="@id/googleBtn"
         android:layout_marginBottom="20dp"
         android:textSize="20sp"
-        android:textColor="@color/white"/>
+        android:textColor="@color/black"/>
+
+    <ImageView
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_centerInParent="true"
+        android:src="@drawable/logo"/>
 
 
 
