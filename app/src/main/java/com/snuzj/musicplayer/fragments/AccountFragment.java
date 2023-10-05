@@ -9,10 +9,12 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
 
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
@@ -24,13 +26,23 @@ import com.google.firebase.database.ValueEventListener;
 import com.snuzj.musicplayer.activities.dashboard.user.EditProfileActivity;
 import com.snuzj.musicplayer.activities.login.MainActivity;
 import com.snuzj.musicplayer.R;
+import com.snuzj.musicplayer.adapters.AdapterSongFav;
 import com.snuzj.musicplayer.databinding.FragmentAccountBinding;
+import com.snuzj.musicplayer.models.ModelSong;
+
+import java.util.ArrayList;
 
 public class AccountFragment extends Fragment {
 
     FragmentAccountBinding binding;
     FirebaseAuth firebaseAuth;
     Context mContext;
+
+    String songId, titleTv, artistTv, imageUrl;
+
+    boolean isFavorite = false;
+    ArrayList<ModelSong> songArrayList;
+    AdapterSongFav adapterSongFav;
 
     public AccountFragment() {
         // Required empty public constructor
@@ -57,6 +69,10 @@ public class AccountFragment extends Fragment {
         firebaseAuth = FirebaseAuth.getInstance();
 
         loadMyInfo();
+        loadFavoriteBooks();
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false);
+        binding.favoriteRv.setLayoutManager(layoutManager);
 
         //handle click, edit btn
         binding.editBtn.setOnClickListener(View->{
@@ -73,6 +89,37 @@ public class AccountFragment extends Fragment {
             startActivity(new Intent(mContext, MainActivity.class));
             getActivity().finish();
         });
+
+
+    }
+
+    private void loadFavoriteBooks() {
+        songArrayList = new ArrayList<>();
+
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
+        reference.child(firebaseAuth.getUid()).child("Favorites")
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        songArrayList.clear();
+                        for (DataSnapshot ds: snapshot.getChildren()){
+                            String songId = ""+ds.child("songId").getValue();
+                            ModelSong model = new ModelSong();
+                            model.setId(songId);
+
+                            songArrayList.add(model);
+                        }
+
+                        binding.favoritesTv.setText("Following: "+ songArrayList.size());
+                        adapterSongFav = new AdapterSongFav(mContext,songArrayList);
+                        binding.favoriteRv.setAdapter(adapterSongFav);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
 
 
     }

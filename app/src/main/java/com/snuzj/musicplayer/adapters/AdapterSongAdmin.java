@@ -25,6 +25,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.snuzj.musicplayer.R;
+import com.snuzj.musicplayer.activities.dashboard.PlayMusicActivity;
 import com.snuzj.musicplayer.activities.dashboard.admin.EditMusicActivity;
 import com.snuzj.musicplayer.databinding.RowSongAdminBinding;
 import com.snuzj.musicplayer.filters.FilterSongAdmin;
@@ -104,7 +105,16 @@ public class AdapterSongAdmin extends RecyclerView.Adapter<AdapterSongAdmin.Hold
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         if (i == 0){
-                            //play clicked
+                            Intent intent = new Intent(context, PlayMusicActivity.class);
+                            intent.putExtra("id",id);
+                            intent.putExtra("title",title);
+                            intent.putExtra("album",album);
+                            intent.putExtra("artist",artist);
+                            intent.putExtra("audioUrl",audioUrl);
+                            intent.putExtra("imgUrl",imgUrl);
+                            intent.putExtra("duration",duration);
+                            context.startActivity(intent);
+
 
                         } else if (i==1) {
                             Intent intent = new Intent(context, EditMusicActivity.class);

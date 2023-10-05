@@ -132,7 +132,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="10dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+        tools:listitem="@layout/song_fav_item"/>
 
 
 

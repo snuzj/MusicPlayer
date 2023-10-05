@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="150dp"
+    android:layout_height="210dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="8dp"
+    android:elevation="0dp">
+
+    <RelativeLayout
+        android:layout_width="150dp"
+        android:layout_height="210dp">
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:id="@+id/songIv"
+            android:src="@drawable/ic_song"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/titleTv"
+            android:layout_below="@id/songIv"
+            android:text="title"
+            android:padding="5dp"
+            android:textColor="@color/black"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/artistTv"
+            android:layout_below="@id/titleTv"
+            android:text="artist"
+            android:padding="5dp"/>
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

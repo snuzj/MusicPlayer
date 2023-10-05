@@ -21,6 +21,12 @@
         android:theme="@style/Theme.MusicPlayer"
         tools:targetApi="31">
         <activity
+            android:name=".activities.dashboard.user.SongListUserActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.dashboard.PlayMusicActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.dashboard.admin.EditMusicActivity"
             android:exported="false" />
         <activity
